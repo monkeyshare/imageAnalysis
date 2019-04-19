@@ -1,0 +1,9 @@
+https://ai.yanxishe.com/page/TextTranslation/1305
+1、亮度 灰度值均值
+2、清晰度：像素点数量/图像大小
+3、饱和度：RGB转成HSV后计算饱和度值
+4、模糊：拉普拉斯算子变化
+5、锐度：灰度图的梯度
+6、对比度：the diffrence in luminance or color
+
+tips：不要整张图计算；切成3*3后再计算
