@@ -1,0 +1,7 @@
+https://blog.csdn.net/weixin_38285131/article/details/80890109
+Remark：
+  1）肉眼可以分辨以上图片的质量排名为：img20 > img228 > img56 > img152 > img23 > img215
+    2）与主观感知一致的算法有：Brenner、Tenengrad、Laplacian、SMD2、Energy、JPEG、JPEG2
+  3）Vollat、Entropy算法失误比较多。
+  4）SMD、EAV在判断img20 和 img228的时候出现失误，这两个图片质量都非常好，肉眼有时候很难分辨，因此这种失误在可以接受的范围。
+  5）Variance 在判断img23 和 img215的时候出现失误，这两个图片质量都非常差。
