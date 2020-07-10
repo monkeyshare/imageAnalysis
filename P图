@@ -1,0 +1,68 @@
+#美白
+import cv2
+import numpy as np
+
+original_image1 = cv2.imread('mei.JPG').astype(np.float32)/255
+
+
+
+# 设置调整颜色参数，小于1时，数值越小，越具有美白效果。反之，大于1时数值越大，可对美白照片还原原色
+gamma1 = 0.8
+whitening = np.power(original_image1, gamma1)
+
+# 去除噪点
+denoise = cv2.medianBlur(whitening, 5)
+
+# cv2.imshow('original_image', original_image1)
+# cv2.imshow('whitening', whitening)
+# cv2.imshow('denoise', denoise)
+
+# 将美白图片还原为原色
+gamma2 = 1.8
+# debeautify = np.power(denoise, gamma2)
+# cv2.imshow('debeautify', debeautify)
+# whitening.convertTo(whitening, CV_8UC1, 255, 0);
+cv2.imwrite('whitening.jpg',whitening*255, [int( cv2.IMWRITE_JPEG_QUALITY), 100])
+
+cv2.waitKey(0)
+# https://blog.csdn.net/Dawn__Z/article/details/82468018
+from PIL import Image
+from PIL import ImageEnhance
+filepath='mei.JPG'
+#亮度增强
+brightness=1.4
+image = Image.open(filepath)
+enh_bri=ImageEnhance.Brightness(image)
+image_bright=enh_bri.enhance(brightness)
+image_bright.save('bright.jpg', quality=100)
+#美白
+original_image1 = cv2.imread('bright.jpg').astype(np.float32)/255
+
+# 设置调整颜色参数，小于1时，数值越小，越具有美白效果。反之，大于1时数值越大，可对美白照片还原原色
+gamma1 = 0.9
+whitening = np.power(original_image1, gamma1)
+
+# 去除噪点
+denoise = cv2.medianBlur(whitening, 5)
+cv2.imwrite('whitening.jpg',whitening*255, [int( cv2.IMWRITE_JPEG_QUALITY), 100])
+
+
+# cv2.imwrite('bright.jpg',image_bright, [int( cv2.IMWRITE_JPEG_QUALITY), 100])
+# 对比度增强
+image = Image.open(filepath)
+enh_con = ImageEnhance.Contrast(image)
+contrast =1.3
+image_contrasted = enh_con.enhance(contrast)
+image_contrasted.save('contrasted.jpg', quality=100)
+# 锐度增强
+image = Image.open(filepath)
+enh_sha = ImageEnhance.Sharpness(image)
+sharpness = 1.5
+image_sharped = enh_sha.enhance(sharpness)
+image_sharped.show()
+#色度增强
+image = Image.open(filepath)
+enh_col = ImageEnhance.Color(image)
+color =0.8
+image_colored = enh_col.enhance(color)
+image_colored.show()
